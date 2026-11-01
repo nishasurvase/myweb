@@ -2,11 +2,10 @@ try{
 	node{
 	    properties([parameters([choice(choices: ['master', 'dev', 'qa', 'staging'], description: 'Choose branch to build and deploy', name: 'gitBranch')]), pipelineTriggers([pollSCM('')])])
     stage('Git Checkout'){
-		git credentialsId: 'github', 
-		    url: 'https://github.com/javahometech/my-app',
-			branch: "${params.gitBranch}"
-	}
-	
+		git credentialsId: 'git-credentials', q
+                url: 'https://github.com/survasenisha/myweb.git',
+        branch: "${params.gitBranch}"
+}
 	stage('Maven Build'){
 		sh 'mvn clean package'
 	}
